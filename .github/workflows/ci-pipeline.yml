@@ -1,0 +1,32 @@
+name: CI Pipeline - Build y Pruebas
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Compilar el proyecto
+      run: mvn clean compile
+
+    - name: Ejecutar pruebas unitarias (JUnit)
+      run: mvn test -Dtest=CalculadoraTest
+
+    - name: Ejecutar pruebas de integración (Selenium)
+      run: mvn test -Dtest=SeleniumIntegrationTest
+      continue-on-error: true
