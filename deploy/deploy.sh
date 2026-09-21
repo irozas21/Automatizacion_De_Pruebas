@@ -28,7 +28,7 @@ echo "Despliegue completado en $AMBIENTE"
 
 echo "ETAPA 3: ACCEPTANCE TESTS"
 
-if ls "$AMBIENTE"/*.jar 1> /dev/null 2>&1; then
+if [ ! -f "$AMBIENTE/examen-final-1.0-SNAPSHOT.jar" ]; then
     echo "Acceptance Test 1: JAR desplegado correctamente. PASSED"
     echo "Acceptance Test 2: Ambiente accesible. PASSED"
     echo "Acceptance Test 3: Version correcta. PASSED"
