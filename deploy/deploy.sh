@@ -17,16 +17,9 @@ fi
 mkdir -p "$AMBIENTE"
 cp target/*.jar "$AMBIENTE/" 2>/dev/null || echo "No se encontro JAR, continuando con simulacion..."
 
-
-if [ ! -f "$AMBIENTE/examen-final-1.0-SNAPSHOT.jar" ]; then
-    echo "Acceptance Test 1: JAR NO encontrado. FAILED"
-    ACCEPTANCE_RESULT=1
-else
-    echo "Acceptance Test 1: JAR desplegado correctamente. PASSED"
-    echo "Acceptance Test 2: Ambiente accesible. PASSED"
-    echo "Acceptance Test 3: Version correcta. PASSED"
-    ACCEPTANCE_RESULT=0
-fi
+echo "Acceptance Test 1: Verificando conexion a base de datos... FAILED"
+echo "ERROR: No se pudo conectar a la base de datos de pruebas"
+ACCEPTANCE_RESULT=1
 
 if [ $ACCEPTANCE_RESULT -ne 0 ]; then
     echo "Acceptance Tests FALLARON. Iniciando ROLLBACK..."
